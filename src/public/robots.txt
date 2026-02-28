@@ -1,0 +1,15 @@
+# robots.txt for Charles Ley Baldemor Portfolio
+# Allow all search engines to crawl the website
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://charlesleyb.wixsite.com/charlesleyb/sitemap.xml
+
+# Disallow admin or private sections (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1
