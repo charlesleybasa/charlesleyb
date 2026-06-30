@@ -30,7 +30,6 @@ import imgRectangle16 from "figma:asset/0e927d359db53452a3b098b9168dd43b969af397
 import imgRectangle13 from "figma:asset/1ef9b40d6ad9e4994908f74840b15f59b8250797.png";
 import imgRectangle10 from "figma:asset/63346dcfbb285332673bebcd6eb0d7d3a700ae1d.png";
 import imgRectangle11 from "figma:asset/f6b4315aafa208cae449a758362b3dfb88148b80.png";
-import imgScreenshot20251102At105636Pm1 from "figma:asset/5956b308ed89fb71e8ccdc4c027211abcfb6f368.png";
 import imgPlasticBlueCloudWithDownloadArrow1 from "figma:asset/c62d95b3179d829eac6acb2f848dd7641602b91a.png";
 import imgImage4 from "figma:asset/708face173c60623249a370fe6c16bf60d13967b.png";
 import imgImage5 from "figma:asset/312385c885bc72132e79271d287a1abb818646c3.png";
@@ -404,13 +403,18 @@ export default function App() {
           role="banner"
           aria-label="Hero section - Charles Ley Baldemor introduction"
         >
-          <img
-            src={imgScreenshot20251102At105636Pm1}
-            alt="Charles Ley Baldemor UI/UX Designer creative workspace showcasing modern design elements and digital innovation from Metro Manila Philippines"
-            className="absolute inset-0 w-full h-full object-cover"
-            loading="eager"
-          />
-          
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+          >
+            <source src="/5956b308ed89fb71e8ccdc4c027211abcfb6f368.mp4" type="video/mp4" />
+          </video>
+
           {/* Gradient Overlay - Full viewport width */}
           <div
             className="absolute inset-0 pointer-events-none"
