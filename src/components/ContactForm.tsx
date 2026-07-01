@@ -6,63 +6,58 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 
+const EMPTY_FORM_STATE = {
+  name: "",
+  email: "",
+  phone: "",
+  subject: "",
+  message: "",
+};
+
+type FormData = typeof EMPTY_FORM_STATE;
+
 export function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    setFormData((currentFormData) => ({
+      ...currentFormData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Create mailto link with form data
     const subject = encodeURIComponent(
       formData.subject || "Contact Form Submission",
     );
     const body = encodeURIComponent(
-      `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `Phone: ${formData.phone || "Not provided"}\n` +
-        `Subject: ${formData.subject}\n\n` +
+      [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Phone: ${formData.phone || "Not provided"}`,
+        `Subject: ${formData.subject}`,
+        "",
         `Message:\n${formData.message}`,
+      ].join("\n"),
     );
 
-    const mailtoLink = `mailto:charlesleyb24@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:charlesleyb24@gmail.com?subject=${subject}&body=${body}`;
 
-    // Open mail client
-    window.location.href = mailtoLink;
-
-    // Simulate submission delay
-    setTimeout(() => {
+    window.setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
 
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          subject: "",
-          message: "",
-        });
+      window.setTimeout(() => {
+        setFormData(EMPTY_FORM_STATE);
         setIsSubmitted(false);
       }, 3000);
     }, 1000);

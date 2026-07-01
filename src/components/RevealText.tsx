@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode } from "react";
+import { useIntersectionVisibility } from "../hooks/useIntersectionVisibility";
 
 interface RevealTextProps {
   children: ReactNode;
@@ -14,29 +15,7 @@ export function RevealText({
   className = "",
   variant = "luxury" 
 }: RevealTextProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2, rootMargin: "50px" }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
+  const { ref, isVisible } = useIntersectionVisibility<HTMLDivElement>();
 
   const variants = {
     fade: {
@@ -112,30 +91,8 @@ export function RevealWords({
   className?: string;
   delay?: number;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const { ref, isVisible } = useIntersectionVisibility<HTMLDivElement>();
   const words = text.split(" ");
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2, rootMargin: "50px" }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
 
   const container = {
     hidden: { opacity: 0 },
@@ -196,29 +153,7 @@ export function RevealChars({
   className?: string;
   delay?: number;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2, rootMargin: "50px" }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
+  const { ref, isVisible } = useIntersectionVisibility<HTMLDivElement>();
 
   const container = {
     hidden: { opacity: 0 },

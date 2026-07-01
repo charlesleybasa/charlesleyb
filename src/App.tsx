@@ -43,6 +43,11 @@ import {
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+function scrollToSection(sectionId: string) {
+  const targetSection = document.getElementById(sectionId);
+  targetSection?.scrollIntoView({ behavior: "smooth" });
+}
+
 // Animated Counter Component
 function AnimatedCounter({
   target,
@@ -513,15 +518,7 @@ export default function App() {
 
               {/* View My Work - Outline Button */}
               <button
-                onClick={() => {
-                  const portfolioSection =
-                    document.getElementById(
-                      "portfolio-section",
-                    );
-                  portfolioSection?.scrollIntoView({
-                    behavior: "smooth",
-                  });
-                }}
+                onClick={() => scrollToSection("portfolio-section")}
                 className="border-2 border-white hover:bg-white hover:text-gray-900 transition-all duration-300 h-[52px] sm:h-[60px] lg:h-[70px] rounded-full px-4 sm:px-8 lg:px-10 font-bold text-white shadow-lg hover:scale-[1.02] whitespace-nowrap flex-1 sm:flex-none flex items-center justify-center"
                 style={{ fontSize: "clamp(12px, 1.5vw, 19px)" }}
                 aria-label="Scroll to portfolio section"
@@ -534,14 +531,7 @@ export default function App() {
             <button
               className="flex absolute font-bold gap-2 items-center leading-none not-italic text-nowrap text-white top-4 right-4 md:top-6 md:right-6 lg:top-[805px] lg:right-6 xl:right-12 tracking-wide hover:scale-105 transition-transform duration-300 cursor-pointer bg-transparent border-0"
               style={{ fontSize: "clamp(14px, 1.5vw, 19px)" }}
-              onClick={() => {
-                const contactSection = document.getElementById(
-                  "contact-section",
-                );
-                contactSection?.scrollIntoView({
-                  behavior: "smooth",
-                });
-              }}
+              onClick={() => scrollToSection("contact-section")}
               aria-label="Scroll to contact section to collaborate"
             >
               <span className="relative shrink-0">
